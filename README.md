@@ -2,7 +2,7 @@
 
 General Information:
 
-Our goal with this project was to create an Ebay-style shop where buyers can shop
+The goal for this project was to create an Ebay-style shop where buyers can shop
 products provided to them by sellers. The client features a single login for both users where they
 pick their respective role - buyer or seller. The program then either activates the buyer client or
 the seller client.
@@ -81,7 +81,9 @@ password is never decrypted and the checked password is hashed before being chec
     else:
     return True
 
-How Client Information is Changed
+----------------------------------------------------------------------------------------
+How Client Information is Changed:
+
 Clients (buyers/sellers) can change the information they registered with by choosing to do so at
 their respective main menus. The logic for both operations is very similar, we just change which
 tables we call. Below is the generic function used to create a window prompting for a new value
@@ -122,3 +124,29 @@ which requires extra authentication to configure.
     back_button = tk.Button(change_window, text="Back",
     command=change_window.destroy)
     back_button.pack(pady=10)
+    
+----------------------------------------------------------------------------------------
+How Buyers Shop for Products:
+
+Buyers select the view products page to begin shopping. Everything they need to see is in the
+listbox, but should they want to view product reviews they can select the product and then click
+view reviews. Buyers can add items to their cart in whichever quantity they like. Once they have
+finished, they can view their cart and make any changes they wish before finalizing the order.
+After the order is finished they can view it in the previous orders page.
+
+----------------------------------------------------------------------------------------
+How Sellers Push Their Items:
+
+Sellers can view all the products that have ever been on the market in a single window. We added
+a search function incase sellers have hundreds or thousands of products they sell. They can
+update products, add new ones, or remove old ones. Removing a product does not delete it from
+the database so that information can still be accessed by buyers who previously purchased it.
+Instead, the stock is set to -1 which prevents it from being shown in the product listing unless
+you’re the seller who sold it or a previous buyer.
+
+----------------------------------------------------------------------------------------
+Conclusion:
+
+Our goal was to create a simple to use shopping program that didn’t overwhelm it’s users,
+program features a very straightforward UI, interacts with the databases in an optimized way, 
+and is contained within a docker file to provide an experience that can run on any machine.
