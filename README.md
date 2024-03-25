@@ -56,6 +56,38 @@ associated with the entered email, hashes the password entered using the salt sa
 database, and checks to see if both encrpytions match. This method is secure as the saved
 password is never decrypted and the checked password is hashed before being checked.
 
+    def authenticate(username, password, role):
+    if role == "Buyer":
+    cursor.execute("SELECT salt FROM buyers WHERE email = %s;",
+    (username,))
+    else:
+    cursor.execute("SELECT salt FROM sellers WHERE email = %s;",
+    (username,))
+    record = cursor.fetchall()
+    if not record:
+    return False
+    else:
+    check_password = bcrypt.hashpw(password.encode('utf-8'),
+    record[0][0].encode('utf-8'))
+    if role == "Buyer":
+    cursor.execute("SELECT name FROM buyers WHERE
+    password_hash::bytea = %s;", (check_password,))
+    else:
+    cursor.execute("SELECT name FROM sellers WHERE
+    password_hash::bytea = %s;", (check_password,))
+    record = cursor.fetchall()
+    if not record:
+    return False
+    else:
+    return True
+
+How Client Information is Changed
+Clients (buyers/sellers) can change the information they registered with by choosing to do so at
+their respective main menus. The logic for both operations is very similar, we just change which
+tables we call. Below is the generic function used to create a window prompting for a new value
+for whatever was requested to be changed. It’s used to change all the data except the password,
+which requires extra authentication to configure.
+
     # Generic function used to change client information
     def change_template(title, label_text, change_function):
     # Create a new window for changing client information
