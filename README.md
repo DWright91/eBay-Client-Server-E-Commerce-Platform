@@ -7,37 +7,37 @@ products provided to them by sellers. The client features a single login for bot
 pick their respective role - buyer or seller. The program then either activates the buyer client or
 the seller client.
 
-The login client uses the bycrypt library (and our SQL server uses pg_bycrypt) to encrypt
-users passwords. A salt value is used to differentiate the encryption, so even if two users enter
-the same password it will be different values in the table. Bycrypt uses the Blowfish symmetric
-key block cipher algorithm which employs a method called key stretching to protect against
-brute force attacks. The program also does password hashing to check password validity, so
-nobody’s password is ever decrypted when performing a check.
+    • The login client uses the bycrypt library (and our SQL server uses pg_bycrypt) to encrypt
+    users passwords. A salt value is used to differentiate the encryption, so even if two users enter
+    the same password it will be different values in the table. Bycrypt uses the Blowfish symmetric
+    key block cipher algorithm which employs a method called key stretching to protect against
+    brute force attacks. The program also does password hashing to check password validity, so
+    nobody’s password is ever decrypted when performing a check.
 
-Buyers can change their account info, view products, add products to a cart, view reviews
-for a product, or view previous orders. This is all done via a main menu that opens windows to
-each feature when their respective button is clicked.
+    • Buyers can change their account info, view products, add products to a cart, view reviews
+    for a product, or view previous orders. This is all done via a main menu that opens windows to
+    each feature when their respective button is clicked.
 
-Sellers can add new products, view how users interact with their items (by viewing
+• Sellers can add new products, view how users interact with their items (by viewing
 reviews and seeing how many people ordered their product) and of course change their account
 info.
 
-Our program uses PostgreSQL to handle the relational database side of our program. This
+• Our program uses PostgreSQL to handle the relational database side of our program. This
 contains things like buyers, sellers, products, orders, etc. MongoDB was used to store the
 reviews for products. Our PostgreSQL database contains a few functions for hashing passwords
 as well as some indexes for attributes that are used to search for products within our app. Our
 MongoDB has an index on productid so reviews for a product can be fetched quickly.
 
-The GUI was created using the Python library Tkinter. It’s a free and lightweight package
+• The GUI was created using the Python library Tkinter. It’s a free and lightweight package
 that creates simple yet effective GUIs. While it may look like a program that ran on Windows
 XP, the layout was designed to be intuitive to use.
 
-Our program uses the container Docker to ensure execution consistency across platforms.
+• Our program uses the container Docker to ensure execution consistency across platforms.
 Our docker program knows all necessary information like Python version and libraries for
 running the app and ensures that anyone who installs it will have it work properly on their
 machine.
 
-To exit the program, the user clicks save and exit. This will save all the changes made
+• To exit the program, the user clicks save and exit. This will save all the changes made
 permanently to the databases.
 
 ----------------------------------------------------------------------------------------
